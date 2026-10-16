@@ -1,13 +1,12 @@
 ---
 import '../styles/global.css';
-import Navigation from '../components/Navigation';
 import {url,navigation} from '../lib/site';
 const {title='Telecommunications Infrastructure Services',description='Zanema LLC provides telecommunications infrastructure services across multiple U.S. markets.'}=Astro.props;
 const canonical=new URL('/zanema-web-agent-letta/', 'https://hsv25ai.github.io');
 ---
 <!doctype html><html lang="en-US"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content={description}/><meta name="theme-color" content="#071934"/><title>{title} | Zanema LLC</title><link rel="canonical" href={canonical}/><link rel="icon" type="image/png" href={url('brand/zanema-mark.png')}/><meta property="og:title" content={`${title} | Zanema LLC`}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL(`${url('media/fiber-installation.webp')}`, Astro.site || 'https://hsv25ai.github.io').toString()}/><meta name="twitter:card" content="summary_large_image"/></head><body><a href="#main-content" class="skip">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
-<header class="header"><div class="nav-float"><a href="#home" class="brand" aria-label="Zanema LLC — home"><img src={url('brand/zanema-logo-clean.png')} alt="Zanema" width="286" height="110"/></a><nav class="desktop-nav" aria-label="Main navigation">{navigation.map(link=><a href={`#${link.path}`}>{link.label}</a>)}<a class="action" href="#contact">Let's connect</a></nav><div class="mobile-menu"><Navigation client:load/></div></div></header>
+<header class="header"><div class="nav-float"><a href="#home" class="brand" aria-label="Zanema LLC — home"><img src={url('brand/zanema-logo-clean.png')} alt="Zanema" width="286" height="110"/></a><nav class="desktop-nav" aria-label="Main navigation">{navigation.map(link=><a href={`#${link.path}`}>{link.label}</a>)}<a class="action" href="#contact">Let's connect</a></nav><details class="mobile-menu"><summary class="mobile-nav-trigger">Menu</summary><nav aria-label="Page sections">{navigation.map(link=><a href={`#${link.path}`}>{link.label}</a>)}<a href="#contact">Contact</a></nav></details></div></header>
 <main id="main-content"><slot/></main>
 <footer class="footer"><div class="wrap footer-close"><p class="footer-kicker">Zanema LLC · Plano, Texas</p><p class="footer-display">The work behind<br/>every connection.</p><a class="action action-white" href="#contact">Start a conversation</a></div><div class="wrap footer-meta"><nav class="footer-nav" aria-label="Footer navigation">{navigation.map(l=><a href={`#${l.path}`}>{l.label}</a>)}<a href="#contact">Contact</a><a href="#privacy">Privacy</a><a href="#image-credits">Image notes</a></nav><span>© {new Date().getFullYear()} Zanema LLC. Telecommunications Infrastructure Services.</span></div></footer>
 <script>
@@ -27,6 +26,9 @@ const canonical=new URL('/zanema-web-agent-letta/', 'https://hsv25ai.github.io')
     }
     for (const link of links) link.toggleAttribute('aria-current', link.getAttribute('href') === current && current !== '');
   };
+  document.querySelector('.mobile-menu')?.addEventListener('click', (event) => {
+    if (event.target instanceof HTMLAnchorElement) document.querySelector('.mobile-menu')?.removeAttribute('open');
+  });
   addEventListener('scroll', mark, { passive: true });
   mark();
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
