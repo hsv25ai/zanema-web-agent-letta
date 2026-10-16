@@ -1,3 +1,7 @@
+Read DESIGN.md before any UI work.
+
+Read PROJECT.md for approved claims and launch blockers. The website is US English; owner communication is Spanish. The corporate site is a SINGLE LONG-SCROLL PAGE: main navigation links are section anchors, not internal marketing pages. Keep it mobile-first at 320–1920px. Never publish confidential operational data. Do not deploy without Henry's approval. Use URL helpers only for static assets; nav points to sections. Never claim the form sends inquiries: it is explicitly a local draft preview until backend and contact details are approved.
+
 ## Development
 
 When starting the dev server, use background mode:
